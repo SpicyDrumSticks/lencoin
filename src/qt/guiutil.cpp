@@ -486,9 +486,9 @@ void SetBlackThemeQSS(QApplication& app)
                       "QToolButton:checked { color: rgb(240,241,245); border: none; border-left-color: rgb(116,116,116); border-left-style: solid; border-left-width: 6px; }"
                       "QProgressBar   { color: rgb(149,148,148); border-color: rgb(240,241,245); border-width: 3px; border-style: solid; }"
                       "QProgressBar::chunk { background: rgb(240,241,245); }"
-                      "QTreeView::item { background: rgb(244,247,251); color: rgb(212,213,213); }"
+                      "QTreeView::item { background: rgb(244,247,251); color: rgb(116,116,116); }"
                       "QTreeView::item:selected { background-color: rgb(48,140,198); }"
-                      "QTableView     { background: rgb(217,216,215); color: rgb(212,213,213); gridline-color: rgb(157,160,165); }"
+                      "QTableView     { background: rgb(217,216,215); color: rgb(116,116,116); gridline-color: rgb(157,160,165); }"
                       "QHeaderView::section { background: rgb(116,116,116); color: rgb(240,241,245); }"
                       "QToolBar       { background: rgb(217,216,215); border: none; }");
 }

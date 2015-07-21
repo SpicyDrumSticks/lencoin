@@ -51,7 +51,7 @@ public:
             foreground = qvariant_cast<QColor>(value);
         }
 
-        painter->setPen(fUseBlackTheme ? QColor(0, 0, 45) : foreground);
+        painter->setPen(fUseBlackTheme ? QColor(116, 116, 116) : foreground);
         painter->drawText(addressRect, Qt::AlignLeft|Qt::AlignVCenter, address);
 
         if(amount < 0)
@@ -66,7 +66,7 @@ public:
         {
             foreground = option.palette.color(QPalette::Text);
         }
-        painter->setPen(fUseBlackTheme ? QColor(0, 0, 45) : foreground);
+        painter->setPen(fUseBlackTheme ? QColor(116, 116, 116) : foreground);
         QString amountText = BitcoinUnits::formatWithUnit(unit, amount, true);
         if(!confirmed)
         {
@@ -121,7 +121,7 @@ OverviewPage::OverviewPage(QWidget *parent) :
 
     if (fUseBlackTheme)
     {
-        const char* whiteLabelQSS = "QLabel { color: rgb(0, 0, 45); }";
+        const char* whiteLabelQSS = "QLabel { color: rgb(116, 116, 116); }";
         ui->labelBalance->setStyleSheet(whiteLabelQSS);
         ui->labelStake->setStyleSheet(whiteLabelQSS);
         ui->labelUnconfirmed->setStyleSheet(whiteLabelQSS);

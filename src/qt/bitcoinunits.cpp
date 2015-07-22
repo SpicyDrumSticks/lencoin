@@ -62,8 +62,8 @@ int BitcoinUnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case BTC: return 4; // 10,000 (# zeros, without commas)
-    case cBTC: return 6; // 1,000,000
+    case BTC: return 6; //999,999
+    case cBTC: return 8; //99,999,999
     default: return 0;
     }
 }

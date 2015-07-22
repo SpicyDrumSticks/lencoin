@@ -39,7 +39,7 @@ CTxMemPool mempool;
 map<uint256, CBlockIndex*> mapBlockIndex;
 set<pair<COutPoint, unsigned int> > setStakeSeen;
 
-CBigNum bnProofOfStakeLimitV2(~uint256(0) >> 20);
+CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 
 int nStakeMinConfirmations = 500;
 unsigned int nModifierInterval = 10 * 60; // time to elapse before new modifier is computed
@@ -957,7 +957,7 @@ void static PruneOrphanBlocks()
 
 static CBigNum GetProofOfStakeLimit(int nHeight)
 {
-        return bnProofOfStakeLimitV2;
+        return bnProofOfStakeLimit;
 }
 
 // miner's coin base reward

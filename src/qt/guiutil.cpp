@@ -494,4 +494,3 @@ void SetBlackThemeQSS(QApplication& app)
 }
 
 } // namespace GUIUtil
-

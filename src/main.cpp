@@ -8,7 +8,7 @@
 #include <boost/filesystem/fstream.hpp>
 
 #include "alert.h"
-#include "chainparams.h"
+#include "chainparams.h"n
 #include "checkpoints.h"
 #include "db.h"
 #include "init.h"
@@ -964,20 +964,14 @@ static CBigNum GetProofOfStakeLimit(int nHeight)
 int64_t GetProofOfWorkReward(int64_t nFees)
 {
     int64_t nSubsidy = 10000 * COIN;
-
-    LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
-
     return nSubsidy + nFees;
 }
 
 // miner's coin stake reward
 int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees)
 {
-    int64_t nSubsidy;
-            nSubsidy = COIN * 3 / 2;
-
-    LogPrint("creation", "GetProofOfStakeReward(): create=%s nCoinAge=%d\n", FormatMoney(nSubsidy), nCoinAge);
-
+    int64_t nSubsidy = COIN * 5;
+    
     return nSubsidy + nFees;
 }
 

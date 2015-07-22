@@ -31,10 +31,10 @@ bool CheckProofOfStake(CBlockIndex* pindexPrev, const CTransaction& tx, unsigned
 
 // Check whether the coinstake timestamp meets protocol
 bool CheckCoinStakeTimestamp(int nHeight, int64_t nTimeBlock, int64_t nTimeTx);
-
+/*
 // Get time weight using supplied timestamps
 int64_t GetWeight(int64_t nIntervalBeginning, int64_t nIntervalEnd);
-
+*/
 // Wrapper around CheckStakeKernelHash()
 // Also checks existence of kernel input and min age
 // Convenient for searching a kernel

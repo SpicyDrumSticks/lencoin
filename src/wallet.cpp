@@ -25,7 +25,6 @@ int64_t nTransactionFee = MIN_TX_FEE;
 int64_t nReserveBalance = 0;
 int64_t nMinimumInputValue = 0;
 
-static unsigned int GetStakeSplitAge() { return 8 * 24 * 60 * 60; }
 static int64_t GetStakeCombineThreshold() { return 50 * COIN; }
 
 int64_t gcd(int64_t n,int64_t m) { return m == 0 ? n : gcd(m, n % m); }
@@ -1926,7 +1925,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
                 vwtxPrev.push_back(pcoin.first);
                 txNew.vout.push_back(CTxOut(0, scriptPubKeyOut));
 
-                if (GetWeight(nBlockTime, (int64_t)txNew.nTime) < GetStakeSplitAge())
+                if (nCredit > GetStakeCombineThreshold())
                     txNew.vout.push_back(CTxOut(0, scriptPubKeyOut)); //split stake
                 LogPrint("coinstake", "CreateCoinStake : added kernel type=%d\n", whichType);
                 fKernelFound = true;

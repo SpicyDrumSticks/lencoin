@@ -955,7 +955,7 @@ void static PruneOrphanBlocks()
     mapOrphanBlocks.erase(hash);
 }
 
-static CBigNum GetProofOfStakeLimit(int nHeight)
+static CBigNum GetProofOfStakeLimit()
 {
         return bnProofOfStakeLimit;
 }
@@ -987,7 +987,7 @@ const CBlockIndex* GetLastBlockIndex(const CBlockIndex* pindex, bool fProofOfSta
 
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake)
 {
-    CBigNum bnTargetLimit = fProofOfStake ? GetProofOfStakeLimit(pindexLast->nHeight) : Params().ProofOfWorkLimit();
+    CBigNum bnTargetLimit = fProofOfStake ? GetProofOfStakeLimit() : Params().ProofOfWorkLimit();
 
     if (pindexLast == NULL)
         return bnTargetLimit.GetCompact(); // genesis block

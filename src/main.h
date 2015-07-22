@@ -52,7 +52,7 @@ inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MO
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 
 
-static const unsigned int GetTargetSpacing = 64;
+static const unsigned int GetTargetSpacing = 150; //150 seconds = 2.5 minutes
 
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 15; }
 

@@ -8,7 +8,7 @@
 #include <boost/filesystem/fstream.hpp>
 
 #include "alert.h"
-#include "chainparams.h"n
+#include "chainparams.h"
 #include "checkpoints.h"
 #include "db.h"
 #include "init.h"

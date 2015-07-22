@@ -55,6 +55,8 @@ static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 
 static const unsigned int GetTargetSpacing = 64;
 
+inline bool IsProtocolV3(int64_t nTime) { return TestNet(); }
+
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 15; }
 
 extern CScript COINBASE_FLAGS;
@@ -63,6 +65,7 @@ extern CTxMemPool mempool;
 extern std::map<uint256, CBlockIndex*> mapBlockIndex;
 extern std::set<std::pair<COutPoint, unsigned int> > setStakeSeen;
 extern CBlockIndex* pindexGenesisBlock;
+extern int nStakeMinConfirmations;
 extern unsigned int nStakeMinAge;
 extern unsigned int nNodeLifespan;
 extern int nCoinbaseMaturity;
@@ -128,8 +131,9 @@ void ThreadImport(std::vector<boost::filesystem::path> vImportFiles);
 bool CheckProofOfWork(uint256 hash, unsigned int nBits);
 unsigned int GetNextTargetRequired(const CBlockIndex* pindexLast, bool fProofOfStake);
 int64_t GetProofOfWorkReward(int64_t nFees);
-int64_t GetProofOfStakeReward(int64_t nCoinAge, int64_t nFees);
+int64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, int64_t nCoinAge, int64_t nFees);
 bool IsInitialBlockDownload();
+bool IsConfirmedInNPrevBlocks(const CTxIndex& txindex, const CBlockIndex* pindexFrom, int nMaxDepth, int& nActualDepth);
 std::string GetWarnings(std::string strFor);
 bool GetTransaction(const uint256 &hash, CTransaction &tx, uint256 &hashBlock);
 uint256 WantedByOrphan(const COrphanBlock* pblockOrphan);
@@ -393,7 +397,7 @@ public:
                        std::map<uint256, CTxIndex>& mapTestPool, const CDiskTxPos& posThisTx,
                        const CBlockIndex* pindexBlock, bool fBlock, bool fMiner, unsigned int flags = STANDARD_SCRIPT_VERIFY_FLAGS);
     bool CheckTransaction() const;
-    bool GetCoinAge(CTxDB& txdb, uint64_t& nCoinAge) const;  // ppcoin: get transaction coin age
+    bool GetCoinAge(CTxDB& txdb, const CBlockIndex* pindexPrev, uint64_t& nCoinAge) const;
 
     const CTxOut& GetOutputFor(const CTxIn& input, const MapPrevTx& inputs) const;
 };
@@ -872,6 +876,7 @@ public:
     };
 
     uint64_t nStakeModifier; // hash modifier for proof-of-stake
+    uint256 bnStakeModifierV2;
 
     // proof-of-stake specific fields
     COutPoint prevoutStake;
@@ -899,6 +904,7 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
+        bnStakeModifierV2 = 0;
         hashProof = 0;
         prevoutStake.SetNull();
         nStakeTime = 0;
@@ -923,6 +929,7 @@ public:
         nMoneySupply = 0;
         nFlags = 0;
         nStakeModifier = 0;
+        bnStakeModifierV2 = 0;
         hashProof = 0;
         if (block.IsProofOfStake())
         {
@@ -1099,6 +1106,7 @@ public:
         READWRITE(nMoneySupply);
         READWRITE(nFlags);
         READWRITE(nStakeModifier);
+        READWRITE(bnStakeModifierV2);
         if (IsProofOfStake())
         {
             READWRITE(prevoutStake);

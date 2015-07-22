@@ -35,7 +35,6 @@ QString BitcoinUnits::name(int unit)
     case BTC: return QString("LEN");
     case cBTC: return QString("Cents");
     default: return QString("???");
-    
     }
 }
 
@@ -53,9 +52,9 @@ qint64 BitcoinUnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC:  return 10000;
-    case cBTC: return 100;
-    default:   return 10000;
+    case BTC: return 10000;
+    case mBTC: return 100;
+    default: return 10000;
     }
 }
 
@@ -64,7 +63,7 @@ int BitcoinUnits::amountDigits(int unit)
     switch(unit)
     {
     case BTC: return 4; // 10,000 (# zeros, without commas)
-    case cBTC: return 6; // 1,000,000
+    case mBTC: return 6; // 1,000,000
     default: return 0;
     }
 }
@@ -74,7 +73,7 @@ int BitcoinUnits::decimals(int unit)
     switch(unit)
     {
     case BTC: return 4;
-    case cBTC: return 2;
+    case mBTC: return 2;
     default: return 0;
     }
 }

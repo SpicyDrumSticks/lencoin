@@ -2,7 +2,6 @@
 // Copyright (c) 2009-2012 The Bitcoin developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-//
 #ifndef BITCOIN_MAIN_H
 #define BITCOIN_MAIN_H
 
@@ -55,8 +54,6 @@ static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20
 static const int64_t COIN_YEAR_REWARD = 1 * CENT; // 1% per year
 
 static const unsigned int GetTargetSpacing = 64;
-
-inline bool IsProtocolV3(int64_t nTime) { return TestNet(); }
 
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 15; }
 

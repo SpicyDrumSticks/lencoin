@@ -1,0 +1,2 @@
+debian/bin/lencoind usr/bin
+src/lencoind usr/lib/lencoin
